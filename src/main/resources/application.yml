@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bloodchain
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: saielhaqs@gmail.com
+    password: nqsgcaynvmddjisq
+    # username: saielhaqrun@gmail.com
+    # password: qjuojdyyzhsywoel
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
