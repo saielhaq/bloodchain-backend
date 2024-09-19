@@ -1,4 +1,6 @@
 spring:
+  data:
+    SECRET_KEY: 9f5e1f9d7b8a2d03e6c7a3d3f6e42b4e8a1d3c5a6b7e9f0c1a2b3c4d5e6f7a8b9
   datasource:
     url: jdbc:postgresql://localhost:5432/bloodchain
     username: postgres

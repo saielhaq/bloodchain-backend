@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,11 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "9f5e1f9d7b8a2d03e6c7a3d3f6e42b4e8a1d3c5a6b7e9f0c1a2b3c4d5e6f7a8b9";
+    @Value("${SECRET_KEY}")
+    private String SECRET_KEY;
+
+    // private static final String SECRET_KEY =
+    // "9f5e1f9d7b8a2d03e6c7a3d3f6e42b4e8a1d3c5a6b7e9f0c1a2b3c4d5e6f7a8b9";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,10 +49,8 @@ public class JwtService {
         extraClaims.put("authorities", userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList()));
-        System.out.println("Authorities: " + extraClaims.get("authorities"));
 
         extraClaims.put("cin", ((Users) userDetails).getCin());
-        System.out.println("User ID: " + extraClaims.get("cin"));
 
         extraClaims.put("userId", ((Users) userDetails).getId());
 
@@ -56,7 +59,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

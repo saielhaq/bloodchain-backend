@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         // return rolesRepository.findByName(role.name());
         // }).collect(Collectors.toSet());
         var user = new Users();
-        user.setCin(userAddRequest.getCin());
+        user.setCin(userAddRequest.getCin().toLowerCase());
         user.setFirstname(userAddRequest.getFirstname());
         user.setLastname(userAddRequest.getLastname());
         user.setEmail(userAddRequest.getEmail());

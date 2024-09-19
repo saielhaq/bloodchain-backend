@@ -51,7 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                  * }).collect(Collectors.toSet());
                  */
                 var user = new Users();
-                user.setCin(registerRequest.getCin());
+                user.setCin(registerRequest.getCin().toLowerCase());
                 user.setFirstname(registerRequest.getFirstname());
                 user.setLastname(registerRequest.getLastname());
                 user.setEmail(registerRequest.getEmail());
