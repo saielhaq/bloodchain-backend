@@ -31,6 +31,8 @@ public class SecurityConfiguration {
                                 .authorizeHttpRequests(authorize -> authorize
                                                 .requestMatchers("/api/v1/auth/**", "/swagger-ui/**")
                                                 .permitAll()
+                                                .requestMatchers("/user/findAll")
+                                                .hasAnyAuthority("ADMIN", "RESPONSIBLE")
                                                 .requestMatchers("/donation/getHistory")
                                                 .hasAnyAuthority("ADMIN", "DOCTOR", "RESPONSIBLE")
                                                 .anyRequest()
